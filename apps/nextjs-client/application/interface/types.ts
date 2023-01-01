@@ -1,0 +1,17 @@
+export const TYPES = {
+  AuthService: Symbol.for('AuthService'),
+  AlertService: Symbol.for('AlertService'),
+  FileStreamService: Symbol.for('FileStreamService'),
+  FormRepository: Symbol.for('FormRepository'),
+  UserRepository: Symbol.for('UserRepository'),
+  FetchService: Symbol.for('FetchService'),
+  FetchObservableService: Symbol.for('FetchObservableService'),
+  FormService: Symbol.for('FormService'),
+  UserService: Symbol.for('UserService'),
+  AuthUseCase: Symbol.for('AuthUseCase'),
+  AlertUseCase: Symbol.for('AlertUseCase'),
+  FormUseCase: Symbol.for('FormUseCase'),
+  UserUseCase: Symbol.for('UserUseCase'),
+  StateManagerAdapater: Symbol.for('StateManagerAdapater'),
+  ReduxStore: Symbol.for('ReduxStore'),
+};

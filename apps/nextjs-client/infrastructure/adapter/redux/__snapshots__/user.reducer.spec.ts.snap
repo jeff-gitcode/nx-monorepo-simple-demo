@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers/user should handle CREATE_USER 1`] = `
+Object {
+  "errors": "",
+  "id": "",
+  "items": Object {},
+}
+`;
+
+exports[`reducers/user should handle DELETE_USER 1`] = `
+Object {
+  "errors": "",
+  "id": "",
+  "items": Object {},
+}
+`;
+
+exports[`reducers/user should handle UPDATE_USER 1`] = `
+Object {
+  "errors": "",
+  "id": "",
+  "items": Object {},
+}
+`;
+
+exports[`reducers/user should return the initial state 1`] = `
+Object {
+  "errors": "",
+  "id": "",
+  "items": Object {},
+}
+`;

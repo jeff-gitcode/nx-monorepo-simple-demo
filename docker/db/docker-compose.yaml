@@ -1,0 +1,78 @@
+version: '3.8'
+
+networks:
+  corp:
+    driver: bridge
+
+services:
+  mongodb:
+    # This image automatically creates a replica set required for transactions
+    image: prismagraphql/mongo-single-replica:4.4.3-bionic
+    ports:
+      - 27017:27017
+    # volumes:
+    #   - ./data/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      # - MONGO_INITDB_USERNAME=myuser
+      # - MONGO_INITDB_PASSWORD=mypassword
+      # - MONGO_INITDB_DATABASE=mydb
+    networks:
+      - corp
+  redis:
+    image: 'redis:alpine'
+    hostname: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - corp
+  # redisinsight:
+  #   image: redislabs/redisinsight:latest
+  #   ports:
+  #     - '8001:8001'
+  #   volumes:
+  #     - ./data/redisinsight:/db
+  # kafka:
+  #   image: 'bitnami/kafka:latest'
+  #   ports:
+  #     - '9092:9092'
+  #   environment:
+  #     - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+  #     - ALLOW_PLAINTEXT_LISTENER=yes
+  #     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+  #     - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+  #     - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+  #     - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+  #     # - KAFKA_BROKER_ID=1
+  #     # - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+  #     # - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+  #     # - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+  #     # - ALLOW_PLAINTEXT_LISTENER=yes
+  # kafka_ui:
+  #   image: provectuslabs/kafka-ui:latest
+  #   depends_on:
+  #     - kafka
+  #   ports:
+  #     - 8080:8080
+  # nextjs-client:
+  #   extends:
+  #     file: docker-compose.base.yml
+  #     service: nx-app-base
+  #   command: yarn start:docker
+  #   ports:
+  #     - 4200:4200
+  #   expose:
+  #     - 4200
+  #   networks:
+  #     - corp
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/frontend/Dockerfile
+  #   container_name: frontend
+  #   restart: always
+  #   ports:
+  #     - 3000:4200
+  #   networks:
+  #     - corp

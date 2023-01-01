@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserDto {
+  id: String
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String
+  refreshToken: String
+}
+
+type MyCodingText {
+  content: String
+}
+
+type TokenDto {
+  accessToken: String
+  refreshToken: String
+}
+
+input UserInput {
+  id: String
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String
+  refreshToken: String
+}
+
+type Query {
+  findAll: [UserDto!]!
+  findOne(id: String!): UserDto!
+  findOneDynamic(searchDto: SearchDTO!): UserDto!
+  login(request: LoginUser!): UserDto!
+  authenticate(request: JWTAuth!): MyCodingText!
+}
+
+input SearchDTO {
+  key: String!
+  value: String!
+}
+
+input LoginUser {
+  id: String
+  username: String!
+  password: String!
+}
+
+input JWTAuth {
+  id: String
+}
+
+type Mutation {
+  createUser(createUser: UserInput!): UserDto!
+  update(id: String!, updateUser: UserInput!): UserDto!
+  remove(id: String!): UserDto!
+  signUp(registerUser: UserInput!): UserDto!
+  refresh: UserDto!
+  logout: TokenDto!
+}

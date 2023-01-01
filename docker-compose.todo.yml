@@ -1,0 +1,99 @@
+---
+version: '3.9'
+services:
+  # React App
+  nextjs-client:
+    container_name: nextjs-client
+    # env_file: apps/nextjs/.env.local
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve nextjs-client --host 0.0.0.0
+    ports:
+      - 4201:4200
+    networks:
+      - monorepo_net
+  # Angular App
+  angular-client:
+    container_name: angular-client
+    # env_file: apps/nextjs/.env.local
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve angular-client --host 0.0.0.0
+    ports:
+      - 4202:4200
+    networks:
+      - monorepo_net
+  # mock server
+  # json-server:
+  #   image: json-server-image:latest
+  #   command: yarn json-server -H 0.0.0.0 -p 3000 -w db.json
+  #   ports:
+  #     - "3000:3000"
+  #   container_name: json-server
+  #   hostname: 0.0.0.0
+  # #   volumes:
+  # #     - ./db.json:/data/db.json
+  # #   restart: always
+  #   networks:
+  #     - monorepo_net
+  json-server:
+    image: json-server-image:latest
+    container_name: json-server
+    command: yarn json-server -H 0.0.0.0 -p 3000 -w db.json
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./db.json:/data/db.json
+    restart: always
+    networks:
+      - monorepo_net
+  # nginx web server
+  nginx:
+    image: nginx
+    build:
+      context: .
+      dockerfile: ./Nginx.Dockerfile
+    ports:
+      - 8080:80
+    # volumes:
+    # - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  # nginx:
+  #   container_name: nginx
+  #   # image: nginx:latest
+  #   build:
+  #     context: .
+  #     dockerfile: ./Nginx.Dockerfile
+  #   ports:
+  #     - 8080:80
+  #   # volumes:
+  #   #  - ./nginx.conf:etc/nginx/nginx.conf
+  #   #   - ./dist/apps/angular-client:/usr/share/nginx/html
+  #   #   - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  #   networks:
+  #     - monorepo_net
+  # express service
+  express-service:
+    container_name: express-service
+    # env_file: apps/nextjs/.env.local
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn nx serve express-service --host 0.0.0.0
+    ports:
+      - 4310:3333 # API Entry port
+      - 4311:4311 # Server Debugging port
+    networks:
+      - monorepo_net
+
+volumes:
+  postgres_data:
+
+networks:
+  monorepo_net:
+    driver: bridge

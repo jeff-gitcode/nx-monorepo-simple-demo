@@ -1,0 +1,87 @@
+<div className="container pt-4 pb-4">
+  <div class="row">
+    <h1>Users</h1>
+  </div>
+
+  <button
+    (click)="createUser('')"
+    class="btn btn-primary"
+    style="margin-left: 10px"
+  >
+    New
+  </button>
+  <!-- <div *ngIf="userList$ | async as data"> -->
+  <div *ngIf="data">
+    <p-table
+      [value]="data"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[10, 25, 50]"
+    >
+      <!-- [globalFilterFields]="['id','firstName','lastName','email']">
+	<ng-template pTemplate="caption">
+		<div class="p-d-flex">
+			<span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+		</div>
+	</ng-template> -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="firstName">
+            First Name <p-sortIcon field="firstName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastName">
+            Last Name <p-sortIcon field="lastName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Email <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="password">
+            Password <p-sortIcon field="password"></p-sortIcon>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rawData>
+        <tr>
+          <td>{{ rawData.id }}</td>
+          <td>{{ rawData.firstName }}</td>
+          <td>{{ rawData.lastName }}</td>
+          <td>{{ rawData.email }}</td>
+          <td>{{ rawData.password }}</td>
+          <td>
+            <button (click)="updateUser(rawData.id)" class="btn btn-primary">
+              Update
+            </button>
+            <button
+              (click)="deleteUser(rawData.id)"
+              class="btn btn-danger"
+              style="margin-left: 10px"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button
+          type="button"
+          icon="pi pi-plus"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button
+          type="button"
+          icon="pi pi-cloud"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

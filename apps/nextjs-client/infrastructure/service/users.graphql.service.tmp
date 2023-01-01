@@ -1,0 +1,62 @@
+import { injectable } from 'inversify';
+
+import { IUserService } from '../../application/interface/spi/iusers.service';
+import { UserDTO } from '../../domain/user';
+import { graphQLClient } from './graphql-client';
+import { GET_ALL_USER } from './graphql.query';
+
+@injectable()
+export class UserGraphQLService1 implements IUserService {
+  constructor() {}
+
+  async getAll(): Promise<UserDTO[]> {
+    const data: any = await graphQLClient.request(GET_ALL_USER);
+    console.log(
+      '🚀 ~ file: users.graphql.service.ts:14 ~ UserGraphQLService ~ getAll ~ data',
+      data
+    );
+
+    return data.allUsers;
+  }
+
+  async getById(id: string): Promise<UserDTO> {
+    // const { loading, error, data } = await graphQLClient.query<
+    //   GetUserQuery,
+    //   GetUserVariable
+    // >({
+    //   query: GET_USER,
+    //   variables: { id },
+    // });
+    // if (loading) return null;
+    // if (error) throw new Error('getAll failed');
+    // return data.User;
+    throw new Error('Method not implemented.');
+  }
+
+  async create(params: UserDTO): Promise<any> {
+    // const { data } = await graphQLClient.mutate({
+    //   mutation: CREATE_USER,
+    //   variables: { ...params },
+    // });
+    // return data;
+    throw new Error('Method not implemented.');
+  }
+
+  async update(id: string, params: UserDTO): Promise<any> {
+    // const { data } = await graphQLClient.mutate({
+    //   mutation: UPDATE_USER,
+    //   variables: { ...params },
+    // });
+    // return data;
+    throw new Error('Method not implemented.');
+  }
+
+  async delete(id: string): Promise<any> {
+    // const { data } = await graphQLClient.mutate({
+    //   mutation: DELETE_USER,
+    //   variables: { id },
+    // });
+    // return data;
+    throw new Error('Method not implemented.');
+  }
+}

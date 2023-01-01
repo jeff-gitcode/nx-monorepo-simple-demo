@@ -1,0 +1,35 @@
+// // ***********************************************************
+// import configureStore from 'redux-mock-store';
+// // Import commands.js using ES2015 syntax:
+// import { mockInitialState } from '../../infrastructure/adapter/redux/mock.state';
+// import './commands';
+
+// // Alternatively you can use CommonJS syntax:
+// // require('./commands')
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import { mount } from 'cypress/react18';
+// import { Provider } from 'react-redux';
+// // import '../../styles/globals.css';
+
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       mount: typeof mount;
+//     }
+//   }
+// }
+
+// const mockStore = configureStore();
+// const createMockedStore = () => mockStore(mockInitialState);
+
+// Cypress.Commands.add('mount', (component, options = {}) => {
+//   // Use the default store if one is not provided
+//   const { reduxStore = createMockedStore(), ...mountOptions } = options;
+
+//   const wrapped = <Provider store={reduxStore}>{component}</Provider>;
+
+//   return mount(wrapped, mountOptions);
+// });
+import './commands';
+// Example use:
+// cy.mount(<MyComponent />)
