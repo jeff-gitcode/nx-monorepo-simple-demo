@@ -186,8 +186,6 @@ Nextjs Client Storybook
 
 # 7. [ TODO ITEM ]
 
-## Sorry I am not able to do at this stage as no spare time, you can try to achieve these feature if you are free to do
-
 ## 1. Dockerize
 
 ## 2. Apply Nginx as web server
